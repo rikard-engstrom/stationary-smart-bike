@@ -1,9 +1,10 @@
+#include "Arduino.h"
 #include "BLEHelper.hh"
 
 BLEHelper bleHelper;
 
-unsigned int totalCranks = 0;
-unsigned int lastEventTime = 0;
+uint16_t totalCranks = 0;
+uint16_t lastEventTime = 0;
 
 void setup()
 {
@@ -14,13 +15,9 @@ void setup()
 
 void loop()
 {
-    totalCranks += 1;
+    // 90 RPM
+    totalCranks++;
     bleHelper.notifyCadence(totalCranks, lastEventTime);
     lastEventTime += 682;
-
-    /*Base Unit: org.bluetooth.unit.time.second
-Represented values: M = 1, d = 0, b = -10
-Unit is 1/1024 second
-*/
     delay(700);
 }
